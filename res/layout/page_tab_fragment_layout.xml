@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/color_gray_eaeaea" >
+
+    <com.example.refreashtabview.refreash.PullToRefreshListView
+        xmlns:ptr="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/page_tab_listview"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:cacheColorHint="@color/white"
+        android:divider="@color/transparent"
+        android:dividerHeight="0dip"
+        android:fadingEdge="none"
+        android:fastScrollEnabled="false"
+        android:listSelector="@color/transparent"
+        android:smoothScrollbar="true"
+        android:visibility="visible"
+        ptr:ptrHeaderTextColor="@color/color_grey_999999"
+        ptr:ptrMode="both" />
+
+</FrameLayout>

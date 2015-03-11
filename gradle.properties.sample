@@ -1,0 +1,6 @@
+storepassword=
+keyalias=
+keypassword=
+sdkVersion=Google Inc.:Google APIs:21
+buildToolsVer=21.1.1
+gradlePath=com.android.tools.build:gradle:1.0.0

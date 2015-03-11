@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="color_gray_eaeaea">#eaeaea</color>
+    <color name="white">#ffffff</color>
+    <color name="color_black_333333">#333333</color>
+    <color name="color_grey_999999">#999999</color>
+    <color name="color_black_d9d9d9">#d9d9d9</color>
+    <color name="color_purple_bd6aff">#bd6aff</color>
+    <color name="GreyWhite_has_alpha">#66FAFAFA</color>
+    <color name="transparent">#00000000</color>
+    <color name="action_bar_tittle_color_555555">#555555</color>
+</resources>

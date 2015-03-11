@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_gray_eaeaea" >
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <LinearLayout
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="vertical" >
+
+        <ImageView
+            android:id="@+id/show_event_detail_bg"
+            android:layout_width="fill_parent"
+            android:layout_height="135dip"
+            android:contentDescription="@string/empty"
+            android:scaleType="fitXY"
+            android:src="@drawable/header_default_bk" />
+
+        <TextView
+            android:id="@+id/show_event_detail_desc"
+            android:layout_width="wrap_content"
+            android:layout_height="104dip"
+            android:paddingBottom="24dip"
+            android:layout_marginLeft="15dip"
+            android:layout_marginRight="15dip"
+            android:paddingTop="25dip"
+            android:text="@string/head_title_desc"
+            android:textColor="@color/color_black_333333"
+            android:textSize="14sp" />
+
+        <View style="@style/horizontal_gray_divider" />
+
+        <View style="@style/horizontal_gray_divider" />
+        
+        <com.example.refreashtabview.sliding.PagerSlidingTabStrip
+            android:id="@+id/show_tabs"
+            android:layout_width="match_parent"
+            android:layout_height="44dip"
+            android:background="@color/white" />
+    </LinearLayout>
+
+</RelativeLayout>
