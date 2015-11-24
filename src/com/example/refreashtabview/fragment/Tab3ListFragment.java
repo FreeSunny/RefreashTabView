@@ -1,7 +1,5 @@
 package com.example.refreashtabview.fragment;
 
-import java.util.ArrayList;
-
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.os.Handler;
@@ -22,6 +20,8 @@ import com.example.refreashtabview.refreash.PullToRefreshBase;
 import com.example.refreashtabview.refreash.PullToRefreshBase.OnRefreshListener2;
 import com.example.refreashtabview.refreash.PullToRefreshListView;
 import com.example.refreashtabview.refreash.PullToRefreshListView.OnHeaderScrollListener;
+
+import java.util.ArrayList;
 
 public class Tab3ListFragment extends ScrollTabHolderFragment {
 
@@ -127,10 +127,10 @@ public class Tab3ListFragment extends ScrollTabHolderFragment {
 	}
 
 	/**
-	 * ÏÂÀ­Çå¿Õ¾ÉµÄÊý¾Ý
+	 * æ¨¡æ‹ŸåŠ è½½æ•°æ®
 	 */
 	private void loadNews() {
-		handler.postDelayed(new Runnable() {// Ä£ÄâÔ¶³Ì»ñÈ¡Êý¾Ý
+		handler.postDelayed(new Runnable() {// Ä£ï¿½ï¿½Ô¶ï¿½Ì»ï¿½È¡ï¿½ï¿½ï¿½
 
 					@Override
 					public void run() {
@@ -152,7 +152,7 @@ public class Tab3ListFragment extends ScrollTabHolderFragment {
 	}
 
 	protected void loadOlds() {
-		handler.postDelayed(new Runnable() {// Ä£ÄâÔ¶³Ì»ñÈ¡Êý¾Ý
+		handler.postDelayed(new Runnable() {// Ä£ï¿½ï¿½Ô¶ï¿½Ì»ï¿½È¡ï¿½ï¿½ï¿½
 
 					@Override
 					public void run() {
@@ -166,7 +166,7 @@ public class Tab3ListFragment extends ScrollTabHolderFragment {
 				}, 300);
 	}
 
-	// PullToRefreshListView ×Ô¶¯Ìí¼ÓÁËÒ»¸öÍ·²¿
+	// PullToRefreshListView æ»šåŠ¨ä½ç½®è°ƒæ•´
 	@Override
 	public void adjustScroll(int scrollHeight) {
 		if (scrollHeight == 0 && listView.getRefreshableView().getFirstVisiblePosition() >= 2) {

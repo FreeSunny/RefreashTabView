@@ -16,6 +16,9 @@ import com.example.refreashtabview.fragment.ScrollTabHolder;
 import com.example.refreashtabview.sliding.PagerSlidingTabStrip;
 import com.nineoldandroids.view.ViewHelper;
 
+/**
+ *
+ */
 public class MainActivity extends ActionBarActivity implements OnPageChangeListener, ScrollTabHolder {
 
 	private PagerSlidingTabStrip tabs;
@@ -52,7 +55,7 @@ public class MainActivity extends ActionBarActivity implements OnPageChangeListe
 
 	private void setupPager() {
 		adapter = new SlidingPagerAdapter(getSupportFragmentManager(), this, viewPager);
-		adapter.setTabHolderScrollingListener(this);//¿ØÖÆÒ³ÃæÉÏ»¬
+		adapter.setTabHolderScrollingListener(this);//æ§åˆ¶é¡µé¢æ»‘åŠ¨
 		viewPager.setOffscreenPageLimit(adapter.getCacheCount());
 		viewPager.setAdapter(adapter);
 		viewPager.setOnPageChangeListener(this);
@@ -78,9 +81,9 @@ public class MainActivity extends ActionBarActivity implements OnPageChangeListe
 		SparseArrayCompat<ScrollTabHolder> scrollTabHolders = adapter.getScrollTabHolders();
 		ScrollTabHolder currentHolder = scrollTabHolders.valueAt(position);
 		if (NEED_RELAYOUT) {
-			currentHolder.adjustScroll((int) (header.getHeight() + headerTop));// ĞŞÕı¹ö³öÈ¥µÄÆ«ÒÆÁ¿
+			currentHolder.adjustScroll((int) (header.getHeight() + headerTop));// ä¿®æ­£æ»šå‡ºå»çš„åç§»é‡
 		} else {
-			currentHolder.adjustScroll((int) (header.getHeight() + ViewHelper.getTranslationY(header)));// ĞŞÕı¹ö³öÈ¥µÄÆ«ÒÆÁ¿
+			currentHolder.adjustScroll((int) (header.getHeight() + ViewHelper.getTranslationY(header)));// ä¿®æ­£æ»šå‡ºå»çš„åç§»é‡
 		}
 	}
 
@@ -102,7 +105,7 @@ public class MainActivity extends ActionBarActivity implements OnPageChangeListe
 
 	private int headerTop = 0;
 
-	// Ë¢ĞÂÍ·²¿ÏÔÊ¾Ê±£¬Ã»ÓĞonScroll»Øµ÷£¬Ö»ÓĞµ±Ë¢ĞÂÊ±»áÓĞ
+	// åˆ·æ–°å¤´éƒ¨æ˜¾ç¤ºæ—¶ï¼Œæ²¡æœ‰onScrollå›è°ƒï¼Œåªæœ‰åˆ·æ–°æ—¶æœ‰
 	@Override
 	public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount,
 			int pagePosition) {
@@ -131,12 +134,12 @@ public class MainActivity extends ActionBarActivity implements OnPageChangeListe
 	}
 
 	/**
-	 * Ö÷ÒªËãÕâÍæÒâ£¬PullToRefreshListView²åÈëÁËÒ»¸öË¢ĞÂÍ·²¿£¬Òò´ËÒª¸ù¾İ²»Í¬µÄÇé¿ö¼ÆËãµ±Ç°µÄÆ«ÒÆÁ¿</br>
+	 * ä¸»è¦ç®—è¿™ç©æ„ï¼ŒPullToRefreshListViewæ’å…¥äº†ä¸€ä¸ªåˆ·æ–°å¤´éƒ¨ï¼Œå› æ­¤è¦æ ¹æ®ä¸åŒçš„æƒ…å†µè®¡ç®—å½“å‰çš„åç§»é‡</br>
 	 * 
-	 * µ±Ë¢ĞÂÊ±£º Ë¢ĞÂÍ·²¿ÏÔÊ¾£¬Òò´ËÆ«ÒÆÁ¿Òª¼ÓÉÏË¢ĞÂÍ·µÄÊıÖµ Î´Ë¢ĞÂÊ±£º Æ«ÒÆÁ¿²»¼ÆËãÍ·²¿¡£
+	 * å½“åˆ·æ–°æ—¶ï¼š åˆ·æ–°å¤´éƒ¨æ˜¾ç¤ºï¼Œå› æ­¤åç§»é‡è¦åŠ ä¸Šåˆ·æ–°å¤´çš„æ•°å€¼ æœªåˆ·æ–°æ—¶ï¼š åç§»é‡ä¸è®¡ç®—å¤´éƒ¨ã€‚
 	 * 
-	 * firstVisiblePosition >1Ê±£¬listviewÖĞµÄÏî¿ªÊ¼ÏÔÊ¾£¬¹ÃÇÒÈÏÎªÃ¿Ò»ÏîµÈ¸ßÀ´¼ÆËãÆ«ÒÆÁ¿£¨ÆäÊµÖ»ÒªÏÔÊ¾Ò»¸öÏî£¬ÏòÉÏÆ«ÒÆ
-	 * Á¿ÒÑ¾­´óÓÚÍ·²¿µÄ×î´óÆ«ÒÆÁ¿£¬Òò´Ë²»×¼È·Ò²Ã»ÓĞ¹ØÏµ£©
+	 * firstVisiblePosition >1æ—¶ï¼Œlistviewä¸­çš„é¡¹å¼€å§‹æ˜¾ç¤ºï¼Œå§‘ä¸”è®¤ä¸ºæ¯ä¸€é¡¹ç­‰é«˜æ¥è®¡ç®—åç§»é‡ï¼ˆå…¶å®åªè¦æ˜¾ç¤ºä¸€ä¸ªé¡¹ï¼Œå‘ä¸Šåç§»
+	 * é‡å·²ç»å¤§äºå¤´éƒ¨çš„æœ€å¤§åç§»é‡ï¼Œå› æ­¤ä¸å‡†ç¡®ä¹Ÿæ²¡æœ‰å…³ç³»ï¼‰
 	 * 
 	 * @param view
 	 * @return
@@ -157,7 +160,12 @@ public class MainActivity extends ActionBarActivity implements OnPageChangeListe
 		}
 	}
 
-	// ÓëonHeadScroll»¥³â£¬²»ÄÜÍ¬Ê±Ö´ĞĞ
+	/**
+	 * ä¸onHeadScrolläº’æ–¥ï¼Œä¸èƒ½åŒæ—¶æ‰§è¡Œ
+	 * @param isRefreashing
+	 * @param value
+	 * @param pagePosition
+	 */
 	@Override
 	public void onHeaderScroll(boolean isRefreashing, int value, int pagePosition) {
 		if (viewPager.getCurrentItem() != pagePosition) {
