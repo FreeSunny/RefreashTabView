@@ -8,6 +8,7 @@
     <string name="page_tab2">Tab2</string>
     <string name="page_tab3">Tab3</string>
     <string name="head_title_desc">该demo包含上滑悬浮头部，同时上下拉可刷新数据，可以左右滑动切换tab</string>
+    <string name="head_title_desc_link">查看链接</string>
     <string name="empty"></string>
 
     <!--  -->
