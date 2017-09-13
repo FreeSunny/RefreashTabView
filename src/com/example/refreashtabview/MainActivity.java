@@ -13,12 +13,16 @@ import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.AbsListView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.refreashtabview.adapter.SlidingPagerAdapter;
 import com.example.refreashtabview.fragment.ScrollTabHolder;
+import com.example.refreashtabview.fragment.ScrollTabHolderFragment;
 import com.example.refreashtabview.sliding.PagerSlidingTabStrip;
 import com.example.refreashtabview.wight.WrapperTextView;
 import com.nineoldandroids.view.ViewHelper;
@@ -26,7 +30,13 @@ import com.nineoldandroids.view.ViewHelper;
 /**
  *
  */
-public class MainActivity extends ActionBarActivity implements OnPageChangeListener, ScrollTabHolder {
+public class MainActivity extends ActionBarActivity implements OnPageChangeListener, ScrollTabHolder, View
+        .OnClickListener {
+
+    /**
+     * click on time height add 20px
+     */
+    public static final int OFFSET_HEIGHT = 20;
 
     private PagerSlidingTabStrip tabs;
 
@@ -41,12 +51,16 @@ public class MainActivity extends ActionBarActivity implements OnPageChangeListe
     private int headerHeight;
     private int headerTranslationDis;
 
+    private LinearLayout changeHeight;
+    private TextView changBtn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_activity);
         getHeaderHeight();
         findViews();
+        setViewsListener();
         initDesc();
         setupPager();
         setupTabs();
@@ -57,6 +71,12 @@ public class MainActivity extends ActionBarActivity implements OnPageChangeListe
         viewPager = (ViewPager) findViewById(R.id.pager);
         header = (LinearLayout) findViewById(R.id.header);
         descTextView = (WrapperTextView) findViewById(R.id.show_event_detail_desc);
+        changeHeight = (LinearLayout) findViewById(R.id.change_content);
+        changBtn = (TextView) findViewById(R.id.change_height);
+    }
+
+    private void setViewsListener() {
+        changBtn.setOnClickListener(this);
     }
 
     private void initDesc() {
@@ -163,6 +183,43 @@ public class MainActivity extends ActionBarActivity implements OnPageChangeListe
         }
     }
 
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.change_height:
+                onChange();
+                break;
+        }
+    }
+
+    private void onChange() {
+        ViewGroup.LayoutParams layoutParams = changeHeight.getLayoutParams();
+        layoutParams.height += OFFSET_HEIGHT;
+        changeHeight.setLayoutParams(layoutParams);
+        changeHeight.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                changeHeight.getViewTreeObserver().removeGlobalOnLayoutListener(this);
+                headerHeight += OFFSET_HEIGHT;
+                headerTranslationDis -= OFFSET_HEIGHT;
+                notifyFragment();
+            }
+        });
+    }
+
+    /**
+     *
+     */
+    private void notifyFragment() {
+        ScrollTabHolderFragment[] fragments = adapter.getFragments();
+        for (int i = 0; i < fragments.length; ++i) {
+            ScrollTabHolderFragment fragment = fragments[i];
+            if (fragment != null) {
+                fragment.headerChange();
+            }
+        }
+    }
+
     /**
      * 主要算这玩意，PullToRefreshListView插入了一个刷新头部，因此要根据不同的情况计算当前的偏移量</br>
      * <p/>
@@ -193,12 +250,12 @@ public class MainActivity extends ActionBarActivity implements OnPageChangeListe
     /**
      * 与onHeadScroll互斥，不能同时执行
      *
-     * @param isRefreashing
+     * @param isRefresh
      * @param value
      * @param pagePosition
      */
     @Override
-    public void onHeaderScroll(boolean isRefreashing, int value, int pagePosition) {
+    public void onHeaderScroll(boolean isRefresh, int value, int pagePosition) {
         if (viewPager.getCurrentItem() != pagePosition) {
             return;
         }
@@ -215,6 +272,14 @@ public class MainActivity extends ActionBarActivity implements OnPageChangeListe
         } else {
             ViewHelper.setTranslationY(header, -value);
         }
+    }
+
+    @Override
+    public int headerHeight() {
+        if (headerHeight == 0) {// return default height
+            return getResources().getDimensionPixelSize(R.dimen.max_header_height);
+        }
+        return headerHeight;
     }
 
 }
