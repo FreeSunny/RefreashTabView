@@ -1,7 +1,7 @@
 # RefreashTabView
 ## 头部悬停可刷新控件
 
-[Demo effect](https://github.com/FreeSunny/RefreashTabView/assets/refreash.gif)
+[Demo effect](https://github.com/FreeSunny/RefreashTabView/tree/master/assets/refreash.gif)
 
 >>version 1.0.0
 
