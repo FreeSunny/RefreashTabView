@@ -1,6 +1,5 @@
 package com.example.refreashtabview;
 
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.util.SparseArrayCompat;
 import android.support.v4.view.ViewPager;
@@ -11,7 +10,6 @@ import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
@@ -24,6 +22,7 @@ import com.example.refreashtabview.adapter.SlidingPagerAdapter;
 import com.example.refreashtabview.fragment.ScrollTabHolder;
 import com.example.refreashtabview.fragment.ScrollTabHolderFragment;
 import com.example.refreashtabview.sliding.PagerSlidingTabStrip;
+import com.example.refreashtabview.wight.FixLinearLayout;
 import com.example.refreashtabview.wight.WrapperTextView;
 import com.nineoldandroids.view.ViewHelper;
 
@@ -44,7 +43,7 @@ public class MainActivity extends ActionBarActivity implements OnPageChangeListe
 
     private SlidingPagerAdapter adapter;
 
-    private LinearLayout header;
+    private FixLinearLayout header;
 
     private WrapperTextView descTextView;
 
@@ -69,7 +68,7 @@ public class MainActivity extends ActionBarActivity implements OnPageChangeListe
     private void findViews() {
         tabs = (PagerSlidingTabStrip) findViewById(R.id.show_tabs);
         viewPager = (ViewPager) findViewById(R.id.pager);
-        header = (LinearLayout) findViewById(R.id.header);
+        header = (FixLinearLayout) findViewById(R.id.header);
         descTextView = (WrapperTextView) findViewById(R.id.show_event_detail_desc);
         changeHeight = (LinearLayout) findViewById(R.id.change_content);
         changBtn = (TextView) findViewById(R.id.change_height);
@@ -129,11 +128,7 @@ public class MainActivity extends ActionBarActivity implements OnPageChangeListe
         reLocation = true;
         SparseArrayCompat<ScrollTabHolder> scrollTabHolders = adapter.getScrollTabHolders();
         ScrollTabHolder currentHolder = scrollTabHolders.valueAt(position);
-        if (NEED_RELAYOUT) {
-            currentHolder.adjustScroll((int) (header.getHeight() + headerTop));// 修正滚出去的偏移量
-        } else {
-            currentHolder.adjustScroll((int) (header.getHeight() + ViewHelper.getTranslationY(header)));// 修正滚出去的偏移量
-        }
+        currentHolder.adjustScroll((int) (header.getHeight() + ViewHelper.getTranslationY(header)));// 修正滚出去的偏移量
     }
 
     @Override
@@ -150,9 +145,6 @@ public class MainActivity extends ActionBarActivity implements OnPageChangeListe
 
     private int headerScrollSize = 0;
 
-    public static final boolean NEED_RELAYOUT = Integer.valueOf(Build.VERSION.SDK).intValue() < Build.VERSION_CODES
-            .HONEYCOMB;
-
     private int headerTop = 0;
 
     // 刷新头部显示时，没有onScroll回调，只有刷新时有
@@ -168,19 +160,7 @@ public class MainActivity extends ActionBarActivity implements OnPageChangeListe
         }
         reLocation = false;
         int scrollY = Math.max(-getScrollY(view), headerTranslationDis);
-        if (NEED_RELAYOUT) {
-            headerTop = scrollY;
-            header.post(new Runnable() {
-
-                @Override
-                public void run() {
-                    Log.e("Main", "scorry1=" + headerTop);
-                    header.layout(0, headerTop, header.getWidth(), headerTop + header.getHeight());
-                }
-            });
-        } else {
-            ViewHelper.setTranslationY(header, scrollY);
-        }
+        ViewHelper.setTranslationY(header, scrollY);
     }
 
     @Override
@@ -260,18 +240,7 @@ public class MainActivity extends ActionBarActivity implements OnPageChangeListe
             return;
         }
         headerScrollSize = value;
-        if (NEED_RELAYOUT) {
-            header.post(new Runnable() {
-
-                @Override
-                public void run() {
-                    Log.e("Main", "scorry=" + (-headerScrollSize));
-                    header.layout(0, -headerScrollSize, header.getWidth(), -headerScrollSize + header.getHeight());
-                }
-            });
-        } else {
-            ViewHelper.setTranslationY(header, -value);
-        }
+        ViewHelper.setTranslationY(header, -value);
     }
 
     @Override

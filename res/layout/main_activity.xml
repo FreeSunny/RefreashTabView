@@ -9,7 +9,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
-    <LinearLayout
+
+    <com.example.refreashtabview.wight.FixLinearLayout
         android:id="@+id/header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -64,6 +65,7 @@
             android:layout_width="match_parent"
             android:layout_height="44dip"
             android:background="@color/white"/>
-    </LinearLayout>
+    </com.example.refreashtabview.wight.FixLinearLayout>
+
 
 </RelativeLayout>
