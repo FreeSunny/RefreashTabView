@@ -1,6 +1,10 @@
 # RefreashTabView
 ## 头部悬停可刷新控件
 
+# NEW IMPL(新实现)
+
+> [代码地址](https://github.com/FreeSunny/Amazing#nest-scrolling-view)
+
 >Demo effect
 
 ![Demo effect](https://github.com/FreeSunny/RefreashTabView/blob/master/assets/refreash.gif)
@@ -30,21 +34,16 @@ header头部悬停。向下滑动时，头部展开。
 
 >version 2.0
 
+Fix: TextView has LinkMovementMethod intercept Scroll event
+
+
+>version 3.0
+
 1: SwipeRefreshLayout + NestedScrollView + AppBarLayout + RecycleView 等重新实现了该效果
 
 
 2: 项目地址， Amazing下的Nest Scrolling View
 [link](https://github.com/FreeSunny/Amazing#nest-scrolling-view)
-
-> future
-
-* 以下看用户需求
-
-1: 顶部文字拦截事件处理
-
-*2：可能会改写成recyclerView*
-
-3: 去掉refresh控件，采用原生处理
 
 #LICENSE
 ----------

@@ -8,7 +8,6 @@ import android.support.v7.app.ActionBarActivity;
 import android.text.SpannableString;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
-import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,14 +22,14 @@ import com.example.refreashtabview.fragment.ScrollTabHolder;
 import com.example.refreashtabview.fragment.ScrollTabHolderFragment;
 import com.example.refreashtabview.sliding.PagerSlidingTabStrip;
 import com.example.refreashtabview.wight.FixLinearLayout;
+import com.example.refreashtabview.wight.LinkMovement;
 import com.example.refreashtabview.wight.WrapperTextView;
 import com.nineoldandroids.view.ViewHelper;
 
 /**
  *
  */
-public class MainActivity extends ActionBarActivity implements OnPageChangeListener, ScrollTabHolder, View
-        .OnClickListener {
+public class MainActivity extends ActionBarActivity implements OnPageChangeListener, ScrollTabHolder, View.OnClickListener {
 
     /**
      * click on time height add 20px
@@ -93,7 +92,9 @@ public class MainActivity extends ActionBarActivity implements OnPageChangeListe
         stringBuilder.append(span);
         stringBuilder.append(" ");
         descTextView.setText(stringBuilder);
-        descTextView.setMovementMethod(LinkMovementMethod.getInstance());
+        //descTextView.setMovementMethod(LinkMovementMethod.getInstance());
+        // fix TextView has LinkMovementMethod intercept Scroll event
+        descTextView.setOnTouchListener(LinkMovement.getInstance());
     }
 
     private void getHeaderHeight() {
@@ -149,8 +150,7 @@ public class MainActivity extends ActionBarActivity implements OnPageChangeListe
 
     // 刷新头部显示时，没有onScroll回调，只有刷新时有
     @Override
-    public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount, int
-            pagePosition) {
+    public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount, int pagePosition) {
         if (viewPager.getCurrentItem() != pagePosition) {
             return;
         }
